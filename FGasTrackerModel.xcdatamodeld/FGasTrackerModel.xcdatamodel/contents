@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+    <entity name="Car" representedClassName="Car" syncable="YES">
+        <attribute name="make" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userObjectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="year" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <relationship name="gasFill" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="GasFill" inverseName="car" inverseEntity="GasFill" syncable="YES"/>
+    </entity>
+    <entity name="GasFill" representedClassName="GasFill" syncable="YES">
+        <attribute name="carObjectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="completeFill" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="gallons" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="objectId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pricePerGallon" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalMilage" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="totalPrice" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="trip" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="userObjectId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="gasFill" inverseEntity="Car" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Car" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="GasFill" positionX="-63" positionY="-18" width="128" height="210"/>
+    </elements>
+</model>

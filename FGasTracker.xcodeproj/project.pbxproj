@@ -7,21 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F017AB81BD9ABC000738E95 /* GasTrackerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F017AB71BD9ABC000738E95 /* GasTrackerTableViewCell.swift */; };
+		4F361F631BDB1DC300D380FA /* IntegerTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F621BDB1DC300D380FA /* IntegerTextFieldDelegate.swift */; };
+		4F361F651BDBE45200D380FA /* AddFillupExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F641BDBE45200D380FA /* AddFillupExtension.swift */; };
+		4F361F671BDBE65B00D380FA /* AddCarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F661BDBE65B00D380FA /* AddCarExtension.swift */; };
+		4F361F691BE0A1F500D380FA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F681BE0A1F500D380FA /* DateViewController.swift */; };
 		4F4BE0521BC6210900BE23A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0511BC6210900BE23A7 /* AppDelegate.swift */; };
-		4F4BE0541BC6210900BE23A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0531BC6210900BE23A7 /* ViewController.swift */; };
+		4F4BE0541BC6210900BE23A7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0531BC6210900BE23A7 /* LoginViewController.swift */; };
 		4F4BE0571BC6210900BE23A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4BE0551BC6210900BE23A7 /* Main.storyboard */; };
 		4F4BE0591BC6210900BE23A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F4BE0581BC6210900BE23A7 /* Assets.xcassets */; };
 		4F4BE05C1BC6210900BE23A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4BE05A1BC6210900BE23A7 /* LaunchScreen.storyboard */; };
+		4F4BE0651BC625B000BE23A7 /* parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0641BC625B000BE23A7 /* parse.swift */; };
+		4F4BE0691BC625F300BE23A7 /* parseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0681BC625F300BE23A7 /* parseConstants.swift */; };
+		4FF7B1B91BC63907002A906A /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1B81BC63907002A906A /* RegisterViewController.swift */; };
+		4FF7B1BB1BCDA046002A906A /* GasFill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1BA1BCDA046002A906A /* GasFill.swift */; };
+		4FF7B1BD1BCDA2FF002A906A /* Car.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1BC1BCDA2FF002A906A /* Car.swift */; };
+		4FF7B1BF1BCDA3EC002A906A /* CoreDataStackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1BE1BCDA3EC002A906A /* CoreDataStackManager.swift */; };
+		4FF7B1E51BCDAE85002A906A /* FGasTrackerModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1E31BCDAE85002A906A /* FGasTrackerModel.xcdatamodeld */; };
+		4FF7B1E91BCF016A002A906A /* AddFillUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1E81BCF016A002A906A /* AddFillUpViewController.swift */; };
+		4FF7B1EB1BCF01F0002A906A /* AddCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1EA1BCF01F0002A906A /* AddCarViewController.swift */; };
+		4FF7B1ED1BCF183D002A906A /* GasTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF7B1EC1BCF183D002A906A /* GasTrackerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F017AB71BD9ABC000738E95 /* GasTrackerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasTrackerTableViewCell.swift; sourceTree = "<group>"; };
+		4F361F621BDB1DC300D380FA /* IntegerTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegerTextFieldDelegate.swift; sourceTree = "<group>"; };
+		4F361F641BDBE45200D380FA /* AddFillupExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddFillupExtension.swift; path = ../AddFillupExtension.swift; sourceTree = "<group>"; };
+		4F361F661BDBE65B00D380FA /* AddCarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarExtension.swift; sourceTree = "<group>"; };
+		4F361F681BE0A1F500D380FA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
 		4F4BE04E1BC6210900BE23A7 /* FGasTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGasTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4BE0511BC6210900BE23A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4F4BE0531BC6210900BE23A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4F4BE0531BC6210900BE23A7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4F4BE0561BC6210900BE23A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F4BE0581BC6210900BE23A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4F4BE05B1BC6210900BE23A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F4BE05D1BC6210900BE23A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4F4BE0641BC625B000BE23A7 /* parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parse.swift; sourceTree = "<group>"; };
+		4F4BE0681BC625F300BE23A7 /* parseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parseConstants.swift; sourceTree = "<group>"; };
+		4FF7B1B81BC63907002A906A /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		4FF7B1BA1BCDA046002A906A /* GasFill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasFill.swift; sourceTree = "<group>"; };
+		4FF7B1BC1BCDA2FF002A906A /* Car.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Car.swift; sourceTree = "<group>"; };
+		4FF7B1BE1BCDA3EC002A906A /* CoreDataStackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStackManager.swift; path = ../CoreDataStackManager.swift; sourceTree = "<group>"; };
+		4FF7B1E41BCDAE85002A906A /* FGasTrackerModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FGasTrackerModel.xcdatamodel; sourceTree = "<group>"; };
+		4FF7B1E81BCF016A002A906A /* AddFillUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFillUpViewController.swift; sourceTree = "<group>"; };
+		4FF7B1EA1BCF01F0002A906A /* AddCarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarViewController.swift; sourceTree = "<group>"; };
+		4FF7B1EC1BCF183D002A906A /* GasTrackerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GasTrackerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +84,38 @@
 		4F4BE0501BC6210900BE23A7 /* FGasTracker */ = {
 			isa = PBXGroup;
 			children = (
+				4F4BE0631BC6257600BE23A7 /* ParseManager */,
 				4F4BE0511BC6210900BE23A7 /* AppDelegate.swift */,
-				4F4BE0531BC6210900BE23A7 /* ViewController.swift */,
+				4F361F621BDB1DC300D380FA /* IntegerTextFieldDelegate.swift */,
+				4FF7B1BE1BCDA3EC002A906A /* CoreDataStackManager.swift */,
+				4F4BE0531BC6210900BE23A7 /* LoginViewController.swift */,
+				4FF7B1B81BC63907002A906A /* RegisterViewController.swift */,
+				4FF7B1EA1BCF01F0002A906A /* AddCarViewController.swift */,
+				4F361F661BDBE65B00D380FA /* AddCarExtension.swift */,
+				4FF7B1E81BCF016A002A906A /* AddFillUpViewController.swift */,
+				4F361F641BDBE45200D380FA /* AddFillupExtension.swift */,
+				4FF7B1EC1BCF183D002A906A /* GasTrackerViewController.swift */,
+				4F017AB71BD9ABC000738E95 /* GasTrackerTableViewCell.swift */,
+				4F361F681BE0A1F500D380FA /* DateViewController.swift */,
 				4F4BE0551BC6210900BE23A7 /* Main.storyboard */,
 				4F4BE0581BC6210900BE23A7 /* Assets.xcassets */,
 				4F4BE05A1BC6210900BE23A7 /* LaunchScreen.storyboard */,
 				4F4BE05D1BC6210900BE23A7 /* Info.plist */,
 			);
 			path = FGasTracker;
+			sourceTree = "<group>";
+		};
+		4F4BE0631BC6257600BE23A7 /* ParseManager */ = {
+			isa = PBXGroup;
+			children = (
+				4F4BE0641BC625B000BE23A7 /* parse.swift */,
+				4F4BE0681BC625F300BE23A7 /* parseConstants.swift */,
+				4FF7B1BA1BCDA046002A906A /* GasFill.swift */,
+				4FF7B1BC1BCDA2FF002A906A /* Car.swift */,
+				4FF7B1E31BCDAE85002A906A /* FGasTrackerModel.xcdatamodeld */,
+			);
+			name = ParseManager;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +149,7 @@
 				TargetAttributes = {
 					4F4BE04D1BC6210900BE23A7 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = 6667NLT938;
 					};
 				};
 			};
@@ -134,8 +189,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F4BE0541BC6210900BE23A7 /* ViewController.swift in Sources */,
+				4F4BE0541BC6210900BE23A7 /* LoginViewController.swift in Sources */,
+				4F017AB81BD9ABC000738E95 /* GasTrackerTableViewCell.swift in Sources */,
+				4FF7B1BF1BCDA3EC002A906A /* CoreDataStackManager.swift in Sources */,
+				4FF7B1B91BC63907002A906A /* RegisterViewController.swift in Sources */,
 				4F4BE0521BC6210900BE23A7 /* AppDelegate.swift in Sources */,
+				4F4BE0651BC625B000BE23A7 /* parse.swift in Sources */,
+				4FF7B1EB1BCF01F0002A906A /* AddCarViewController.swift in Sources */,
+				4FF7B1BB1BCDA046002A906A /* GasFill.swift in Sources */,
+				4FF7B1ED1BCF183D002A906A /* GasTrackerViewController.swift in Sources */,
+				4FF7B1E91BCF016A002A906A /* AddFillUpViewController.swift in Sources */,
+				4FF7B1BD1BCDA2FF002A906A /* Car.swift in Sources */,
+				4F361F631BDB1DC300D380FA /* IntegerTextFieldDelegate.swift in Sources */,
+				4F361F671BDBE65B00D380FA /* AddCarExtension.swift in Sources */,
+				4F361F651BDBE45200D380FA /* AddFillupExtension.swift in Sources */,
+				4FF7B1E51BCDAE85002A906A /* FGasTrackerModel.xcdatamodeld in Sources */,
+				4F4BE0691BC625F300BE23A7 /* parseConstants.swift in Sources */,
+				4F361F691BE0A1F500D380FA /* DateViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,10 +316,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FGasTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FurloBros.FGasTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -257,10 +330,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FGasTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.FurloBros.FGasTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -283,8 +359,22 @@
 				4F4BE0621BC6210900BE23A7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4FF7B1E31BCDAE85002A906A /* FGasTrackerModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4FF7B1E41BCDAE85002A906A /* FGasTrackerModel.xcdatamodel */,
+			);
+			currentVersion = 4FF7B1E41BCDAE85002A906A /* FGasTrackerModel.xcdatamodel */;
+			path = FGasTrackerModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4F4BE0461BC6210900BE23A7 /* Project object */;
 }
