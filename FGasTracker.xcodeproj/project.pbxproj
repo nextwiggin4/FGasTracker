@@ -12,6 +12,7 @@
 		4F361F651BDBE45200D380FA /* AddFillupExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F641BDBE45200D380FA /* AddFillupExtension.swift */; };
 		4F361F671BDBE65B00D380FA /* AddCarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F661BDBE65B00D380FA /* AddCarExtension.swift */; };
 		4F361F691BE0A1F500D380FA /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F681BE0A1F500D380FA /* DateViewController.swift */; };
+		4F361F6D1BE2C53C00D380FA /* MPGCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F361F6C1BE2C53C00D380FA /* MPGCalculator.swift */; };
 		4F4BE0521BC6210900BE23A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0511BC6210900BE23A7 /* AppDelegate.swift */; };
 		4F4BE0541BC6210900BE23A7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F4BE0531BC6210900BE23A7 /* LoginViewController.swift */; };
 		4F4BE0571BC6210900BE23A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F4BE0551BC6210900BE23A7 /* Main.storyboard */; };
@@ -35,6 +36,7 @@
 		4F361F641BDBE45200D380FA /* AddFillupExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddFillupExtension.swift; path = ../AddFillupExtension.swift; sourceTree = "<group>"; };
 		4F361F661BDBE65B00D380FA /* AddCarExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCarExtension.swift; sourceTree = "<group>"; };
 		4F361F681BE0A1F500D380FA /* DateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		4F361F6C1BE2C53C00D380FA /* MPGCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPGCalculator.swift; sourceTree = "<group>"; };
 		4F4BE04E1BC6210900BE23A7 /* FGasTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FGasTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F4BE0511BC6210900BE23A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4F4BE0531BC6210900BE23A7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				4F4BE0631BC6257600BE23A7 /* ParseManager */,
 				4F4BE0511BC6210900BE23A7 /* AppDelegate.swift */,
 				4F361F621BDB1DC300D380FA /* IntegerTextFieldDelegate.swift */,
+				4F361F6C1BE2C53C00D380FA /* MPGCalculator.swift */,
 				4FF7B1BE1BCDA3EC002A906A /* CoreDataStackManager.swift */,
 				4F4BE0531BC6210900BE23A7 /* LoginViewController.swift */,
 				4FF7B1B81BC63907002A906A /* RegisterViewController.swift */,
@@ -203,6 +206,7 @@
 				4F361F631BDB1DC300D380FA /* IntegerTextFieldDelegate.swift in Sources */,
 				4F361F671BDBE65B00D380FA /* AddCarExtension.swift in Sources */,
 				4F361F651BDBE45200D380FA /* AddFillupExtension.swift in Sources */,
+				4F361F6D1BE2C53C00D380FA /* MPGCalculator.swift in Sources */,
 				4FF7B1E51BCDAE85002A906A /* FGasTrackerModel.xcdatamodeld in Sources */,
 				4F4BE0691BC625F300BE23A7 /* parseConstants.swift in Sources */,
 				4F361F691BE0A1F500D380FA /* DateViewController.swift in Sources */,

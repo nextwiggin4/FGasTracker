@@ -23,8 +23,8 @@ extension AddCarViewController {
     
     func keyboardWillShow(Notification: NSNotification) {
         //this function is called when the keyboard is called, but we only really care when the bottom text field calls for it. Check to make sure that it is the bottom text field, then set the height of frame to the height of the keybaord. This shifts the entire frame up so the bottom text field is visible when the keyboard is up. Digital high five!
-        
         if nicknameTextField.isFirstResponder(){
+            self.view.frame.origin.y = 0.0
             self.view.frame.origin.y -= getKeyboardHeight(Notification)
         } else if ((!nicknameTextField.isFirstResponder() && self.view.frame.origin.y < 0 )){
             self.view.frame.origin.y = 0.0
@@ -34,9 +34,7 @@ extension AddCarViewController {
     func keyboardWillHide(Notification: NSNotification) {
         //As much fun as it was moving the whole frame out of the way for the keybaord, we should probably put it back now that the keyboard is disappearing. Here we'll again to check to make sure it's the bottom keyboard we're dealing with, than move the frame back in place as the keyboard leaves.
         
-        if (nicknameTextField.isFirstResponder()){
-            self.view.frame.origin.y += getKeyboardHeight(Notification)
-        }
+        self.view.frame.origin.y = 0.0
     }
     
     func getKeyboardHeight(notification: NSNotification) -> CGFloat {

@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "94E6A0E6129DA3FDC41D6C42C11EE5B1F08D2003",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "94E6A0E6129DA3FDC41D6C42C11EE5B1F08D2003" : 0,
+    "888489D95FEB57234C2D0BF5FD1BEC806F5344A3" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9228FD75-E6B5-4F3D-8235-88E3E6A163CF",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "94E6A0E6129DA3FDC41D6C42C11EE5B1F08D2003" : "FGasTracker\/",
+    "888489D95FEB57234C2D0BF5FD1BEC806F5344A3" : "FGasTracker\/FGasTracker\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "FGasTracker",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "FGasTracker.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nextwiggin4\/FGasTracker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "888489D95FEB57234C2D0BF5FD1BEC806F5344A3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/nextwiggin4\/FGasTracker.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "94E6A0E6129DA3FDC41D6C42C11EE5B1F08D2003"
+    }
+  ]
+}

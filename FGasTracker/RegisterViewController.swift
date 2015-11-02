@@ -13,6 +13,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var debugInfo: UILabel!
+    @IBOutlet weak var registrationIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var registerButton: UIButton!
     
     var filePath : String {
         let manager = NSFileManager.defaultManager()
@@ -43,14 +45,21 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func registerButton(sender: AnyObject) {
+        self.registerButton.hidden = true
+        self.registrationIndicator.startAnimating()
+        
         parse.sharedInstance().registerNewUser(username.text!, password: password.text!){ JSONResults, error in
             if let error = error{
+                self.registerButton.hidden = false
+                self.registrationIndicator.stopAnimating()
                 print(error)
             } else {
                 if let error = JSONResults["error"]! {
                     print(JSONResults)
                     print(error)
                     dispatch_async(dispatch_get_main_queue(), {
+                        self.registerButton.hidden = false
+                        self.registrationIndicator.stopAnimating()
                         self.debugInfo.text = error as? String
                     })
                 } else {
@@ -76,6 +85,8 @@ class RegisterViewController: UIViewController {
     
     func completeRegistration() {
         dispatch_async(dispatch_get_main_queue(), {
+            self.registerButton.hidden = false
+            self.registrationIndicator.stopAnimating()
             self.debugInfo.text = "login successful"
             let controller = self.storyboard!.instantiateViewControllerWithIdentifier("GasTrackerNavigationController") as! UINavigationController
             self.presentViewController(controller, animated: true, completion: nil)

@@ -11,22 +11,30 @@ import UIKit
 class IntegerTextFieldDelegate: NSObject, UITextFieldDelegate {
     
     var significantFigures: Int
-    var zeroString: String
+    
+    /* the zero string is created anytime the value is 0, it is set to the correct number of significant figures. 
+        By using a lazy variable it isn't created until the first time the text field is touched, allowing it to create the correct string if the number of sigfigs changes */
+    lazy var zeroString: String = {
+        var tempZeroString = "0"
+        
+        if self.significantFigures <= 0 {
+            tempZeroString = "0"
+        } else {
+            tempZeroString = "0."
+        
+            for var index = 0; index < self.significantFigures; ++index {
+                tempZeroString = tempZeroString + "0"
+            }
+        }
+        
+        return tempZeroString
+    }()
     
     init(sigFig: Int){
         self.significantFigures = sigFig
-        
-        if sigFig <= 0 {
-            self.zeroString = "0"
-        } else {
-            self.zeroString = "0."
-            
-            for var index = 0; index < significantFigures; ++index {
-                self.zeroString = self.zeroString + "0"
-            }
-        }
     }
     
+    /* this function just grabs the text form the text field, gets rid of all non-numeric chacters, then re-creates the string with the decimals and commas in the right place. */
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
         let oldText = textField.text! as NSString
@@ -78,6 +86,7 @@ class IntegerTextFieldDelegate: NSObject, UITextFieldDelegate {
         return true
     }
     
+    /* this method is used to take a string of integers and converts it into a number with commas and decimals at the object's global sig. fig. */
     func stringFromInt(digitText: Int?) -> String{
         var newText: String
         
@@ -97,7 +106,9 @@ class IntegerTextFieldDelegate: NSObject, UITextFieldDelegate {
         return newText
     }
     
+    /* creates a string and adds commans to the whole interger. */
     func integerStringFromInt(value: Int) -> String {
+        //this takes the long integer and converts it to just the whole integer part
         let numberToAddCommas = String(value/Int(pow(Double(10),Double(self.significantFigures))))
         
         let digits = NSCharacterSet.decimalDigitCharacterSet()
@@ -117,30 +128,23 @@ class IntegerTextFieldDelegate: NSObject, UITextFieldDelegate {
         
     }
     
+    /* creates a decimal string at the correct significant figures.  */
     func decimalStringFromInt(value: Int) -> String{
+        //this takes the short integer and converts it to just the decimal portion
         let devisor = Int(pow(Double(10),Double(self.significantFigures)))
         let decimal = value % devisor
         var decimalString = String(decimal)
         var check = 10
         
+        //adds the necessary zeros preceding the decimal (if necessary)
         for var index = 1; index < significantFigures; ++index {
             
-            //print(check)
             if decimal < check {
                 decimalString = "0" + decimalString
             }
             check = check * 10
-            //print(decimalString)
         }
-        /*
-        if decimal < 10 {
-            decimalString = "0" + decimalString
-        }
-        
-        if decimal < 100{
-            decimalString = "0" + decimalString
-        }*/
-        
+
         return decimalString
 
     }

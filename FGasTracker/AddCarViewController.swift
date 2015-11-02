@@ -17,6 +17,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var instructionLabel: UILabel!
     @IBOutlet weak var buttonText: UIButton!
+    @IBOutlet weak var addCarIndicator: UIActivityIndicatorView!
     
     var carToEdit: Car?
     var userObjectId : String?
@@ -92,7 +93,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
             instructionLabel.text = "You must include a nickname"
             
         } else {
-            
+            switchIndicatorOn(true)
             if (carToEdit == nil) {
                 
                 var newCarDictionary = createDicitonary()
@@ -110,6 +111,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
                 
                         CoreDataStackManager.sharedInstance().saveContext()
                         dispatch_async(dispatch_get_main_queue(), {
+                            self.switchIndicatorOn(false)
                             self.navigationController!.popViewControllerAnimated(true)
                         })
                     }
@@ -141,6 +143,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
                         
                         CoreDataStackManager.sharedInstance().saveContext()
                         dispatch_async(dispatch_get_main_queue(), {
+                            self.switchIndicatorOn(false)
                             self.navigationController!.popViewControllerAnimated(true)
                         })
                     }
@@ -150,6 +153,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
     }
     
     func deleteCarTouchUp(){
+        self.switchIndicatorOn(true)
         parse.sharedInstance().deleteFromParse(parse.Resources.Cars, objectId: (carToEdit?.objectId)!){JSONResults, error in
             
             if let error = error{
@@ -161,7 +165,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
                 
                 CoreDataStackManager.sharedInstance().saveContext()
                 dispatch_async(dispatch_get_main_queue(), {
-                    
+                    self.switchIndicatorOn(false)
                     self.navigationController!.popViewControllerAnimated(true)
                 })
             }
@@ -194,6 +198,19 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         newCarDictionary["nickname"] = nicknameTextField.text!
     
         return newCarDictionary
+    }
+    
+    func switchIndicatorOn(state: Bool){
+        if state {
+            buttonText.hidden = true
+            addCarIndicator.startAnimating()
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        } else {
+            buttonText.hidden = false
+            addCarIndicator.stopAnimating()
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        }
+        
     }
     
 }

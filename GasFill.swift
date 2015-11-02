@@ -27,6 +27,7 @@ class GasFill : NSManagedObject {
         static let UserObjectId = "userObjectId"
     }
     
+    /* the variables used in this class are used for keeping track of gas fill information mostly. The objectIds are used for keeping synced with parse. updates and deletes require a known Id */
     @NSManaged var totalMilage: NSNumber?
     @NSManaged var trip: NSNumber?
     @NSManaged var gallons: NSNumber?
@@ -39,10 +40,14 @@ class GasFill : NSManagedObject {
     @NSManaged var carObjectId: String?
     @NSManaged var userObjectId: String?
     
+    var currentMileage: Int?
+    
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
+    
+    //adds all the necessary fields if available form a dictionary. This can be built on the same dictionary used to post to Parse.
     init(dictionary: [String : AnyObject], context: NSManagedObjectContext) {
         let entity = NSEntityDescription.entityForName("GasFill", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)
@@ -61,9 +66,14 @@ class GasFill : NSManagedObject {
 
     }
     
+    //a convience method that converts the gallons Int in to a Double.
     var gallonsDecimal: Double {
         get{
-            return Double(gallons!)/1000.0
+            if let gallons = gallons {
+                return Double(gallons)/1000.0
+            } else {
+                return 0.0
+            }
         }
     }
     

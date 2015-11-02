@@ -10,6 +10,7 @@ import Foundation
 
 class parse : NSObject {
     
+    //This typealias is used in all the parse calls as a completion handler. It's used to manage errors and JSON dictionaries
     typealias CompletionHandler = (result: AnyObject!, error: NSError?) -> Void
     
     var session : NSURLSession
@@ -19,6 +20,7 @@ class parse : NSObject {
         super.init()
     }
     
+    /* this function allows you to register a new user through the parse services. if successfull, it will return a dictionary with the users ID */
     func registerNewUser(username: String, password: String, completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -46,6 +48,7 @@ class parse : NSObject {
         return task
     }
     
+    /* this function allows you to login a registered user through the parse services. if successfull, it will return a dictionary with the users ID */
     func loginUser(methodArguments: [String : AnyObject], completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -72,6 +75,7 @@ class parse : NSObject {
         
     }
     
+    /* this function allows you to logout a logged in user through the parse services. if successfull, you'll be logged out. If not, your stuck! haha! */
     func logoutUser(sessionToken: String, completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -98,6 +102,7 @@ class parse : NSObject {
         
     }
     
+    /* this general purpose get method allows you to access data from the parse servers. Provide a unique methode argument and dictionary to be added as URL parameters */
     func getFromParse(method: String, methodArguments: [String : AnyObject], completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -124,6 +129,7 @@ class parse : NSObject {
         
     }
     
+    /* this general purpose get method allows you to post data from the parse servers. Provide a unique methode argument and dictionary to be added as JSON */
     func postToParse(method: String, methodArguments: [String : AnyObject], completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -137,6 +143,7 @@ class parse : NSObject {
         var JSONData : NSData
         var JSONText : NSString?
         
+        // this try to convert the dictionary to a JSON block. It's much faster and more robust than doing it by hand.
         do{
             JSONData = try NSJSONSerialization.dataWithJSONObject(methodArguments, options: NSJSONWritingOptions.PrettyPrinted)
             JSONText = NSString(data: JSONData, encoding: NSASCIIStringEncoding)!
@@ -162,6 +169,7 @@ class parse : NSObject {
         
     }
     
+    /* this general purpose get method allows you to put udpated data from the parse servers. Provide a unique methode argument and dictionary to be added as JSON */
     func putToParse(method: String, objectId: String, methodArguments: [String : AnyObject], completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -175,13 +183,14 @@ class parse : NSObject {
         var JSONData : NSData
         var JSONText : NSString?
         
+        // this try to convert the dictionary to a JSON block. It's much faster and more robust than doing it by hand.
         do{
             JSONData = try NSJSONSerialization.dataWithJSONObject(methodArguments, options: NSJSONWritingOptions.PrettyPrinted)
             JSONText = NSString(data: JSONData, encoding: NSASCIIStringEncoding)!
         } catch let error as NSError {
             print(error.localizedDescription)
         }
-        
+
         request.HTTPBody = JSONText!.dataUsingEncoding(NSUTF8StringEncoding)
         
         
@@ -200,6 +209,7 @@ class parse : NSObject {
         
     }
     
+    /* this function allows you to delete an object through the parse services. if successfull, it will delete the object */
     func deleteFromParse(method: String, objectId: String, completionHandler: CompletionHandler) -> NSURLSessionDataTask {
         
         let session = NSURLSession.sharedSession()
@@ -283,6 +293,7 @@ class parse : NSObject {
         return (!urlVars.isEmpty ? "?" : "") + urlVars.joinWithSeparator("&")
     }
     
+    //creates a shared instance that can be accessed in any class that calls it.
     class func sharedInstance() -> parse {
         
         struct Singleton {

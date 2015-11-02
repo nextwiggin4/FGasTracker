@@ -19,6 +19,7 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
     @IBOutlet weak var completeFillButton: UIButton!
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var addFillupButton: UIButton!
+    @IBOutlet weak var addFillIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var mileageTextField: UITextField!
     @IBOutlet weak var gallonsTextField: UITextField!
@@ -199,7 +200,6 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
             var userInfoMutable = userInfo
             userInfoMutable["currentCar"] = carPickerData[row]
             NSKeyedArchiver.archiveRootObject(userInfoMutable, toFile: filePath)
-            print("saved as \(carPickerData[row])")
         }
         
         setAddEditButton()
@@ -215,6 +215,7 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     @IBAction func addFillupTouchUp(sender: AnyObject) {
         if (currentCarNickname != "Add a new car") {
+            switchIndicatorOn(true)
             if (gasFillToEdit == nil) {
                 var newFillupDictionary = createDictionary()
                 
@@ -233,7 +234,8 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         
                         CoreDataStackManager.sharedInstance().saveContext()
                         dispatch_async(dispatch_get_main_queue(), {
-                                self.navigationController!.popViewControllerAnimated(true)
+                            self.switchIndicatorOn(false)
+                            self.navigationController!.popViewControllerAnimated(true)
                         })
                     }
                     
@@ -246,7 +248,6 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
                     if let error = error{
                         print(error)
                     } else {
-                        
                         if let mileage = self.mileageTextField.text {
                             if let mileageNumber = self.decimalStringToInt(mileage) {
                                 if self.mileageSwitch.selectedSegmentIndex == 0 {
@@ -282,13 +283,15 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
                         self.gasFillToEdit!.date = self.rightNow
                         self.gasFillToEdit!.car = self.currentCar!
                         
-                        self.gasFillToEdit!.carObjectId = newFillupDictionary["carObjectId"] as! String
+                        self.gasFillToEdit!.carObjectId = newFillupDictionary["carObjectId"] as? String
                         
                         
                         CoreDataStackManager.sharedInstance().saveContext()
                         dispatch_async(dispatch_get_main_queue(), {
+                            self.switchIndicatorOn(false)
                             self.navigationController!.popViewControllerAnimated(true)
                         })
+
                     }
                 }
             }
@@ -297,14 +300,15 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
     
     func createDictionary() -> Dictionary<String, AnyObject> {
         var newFillupDictionary = Dictionary<String, AnyObject>()
+        let deleteString = ["__op":"Delete"]
         
         if let mileage = mileageTextField.text {
             if let mileageNumber = decimalStringToInt(mileage) {
                 if mileageSwitch.selectedSegmentIndex == 0 {
                     newFillupDictionary["totalMillage"] = mileageNumber
-                    newFillupDictionary["currentTrip"] = nil
+                    newFillupDictionary["currentTrip"] = deleteString
                 } else {
-                    newFillupDictionary["totalMillage"] = nil
+                    newFillupDictionary["totalMillage"] = deleteString
                     newFillupDictionary["currentTrip"] = mileageNumber
                 }
             }
@@ -320,9 +324,9 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
             if let priceNumber = decimalStringToInt(price) {
                 if priceSwitch.selectedSegmentIndex == 0 {
                     newFillupDictionary["pricePerGallon"] = priceNumber
-                    newFillupDictionary["totalCost"] = nil
+                    newFillupDictionary["totalCost"] = deleteString
                 } else {
-                    newFillupDictionary["pricePerGallon"] = nil
+                    newFillupDictionary["pricePerGallon"] = deleteString
                     newFillupDictionary["totalCost"] = priceNumber
                 }
             }
@@ -356,9 +360,11 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if mileageSwitch.selectedSegmentIndex == 0 {
             mileageTextField.placeholder = "0"
             mileageTextFieldDelegate.significantFigures = 0
+            mileageLabel.text = "enter your car's total mileage (odometer)"
         } else {
             mileageTextField.placeholder = "0.0"
             mileageTextFieldDelegate.significantFigures = 1
+            mileageLabel.text = "enter your mileage since last fill (trip)"
         }
     }
     
@@ -366,9 +372,11 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
         if priceSwitch.selectedSegmentIndex == 0 {
             priceTextField.placeholder = "0.000"
             priceTextFieldDelegate.significantFigures = 3
+            priceLabel.text = "enter the price you paid per gallon"
         } else {
             priceTextField.placeholder = "0.00"
             priceTextFieldDelegate.significantFigures = 2
+            priceLabel.text = "enter the total price paid for the fill up"
         }
     }
     
@@ -426,16 +434,43 @@ class AddFillUpViewController: UIViewController, UIPickerViewDataSource, UIPicke
         
     }
     
+    func switchIndicatorOn(state: Bool){
+        if state {
+            addFillupButton.hidden = true
+            addFillIndicator.startAnimating()
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        } else {
+            addFillupButton.hidden = false
+            addFillIndicator.stopAnimating()
+            self.navigationItem.rightBarButtonItem?.enabled = false
+        }
+        
+    }
+    
     @IBAction func mileageSwitched(sender: AnyObject) {
         userInfoDictionary["mileageSwitch"] = mileageSwitch.selectedSegmentIndex
         NSKeyedArchiver.archiveRootObject(userInfoDictionary!, toFile: self.filePath)
+        
         formatMileageTextField()
+        if let numberString = mileageTextField.text{
+            if numberString != "" {
+                let tempNumber = decimalStringToInt(numberString)
+                mileageTextField.text = mileageTextFieldDelegate.stringFromInt(tempNumber)
+            }
+        }
     }
     
     @IBAction func priceSwitched(sender: AnyObject) {
         userInfoDictionary["priceSwitch"] = priceSwitch.selectedSegmentIndex
+        
         NSKeyedArchiver.archiveRootObject(userInfoDictionary!, toFile: self.filePath)
         formatPriceTextField()
+        if let numberString = priceTextField.text {
+            if numberString != "" {
+                let tempNumber = decimalStringToInt(numberString)
+                priceTextField.text = priceTextFieldDelegate.stringFromInt(tempNumber)
+            }
+        }
     }
     @IBAction func completeFillSwitched(sender: AnyObject) {
         userInfoDictionary["completeFillButton"] = fillSwitch.on

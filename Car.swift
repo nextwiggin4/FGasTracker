@@ -22,6 +22,7 @@ class Car : NSManagedObject {
         static let userObjectId = "userjObectId"
     }
     
+    /* the variables used in this class are used for keeping track of car information mostly. The objectIds are used for keeping synced with parse. updates and deletes require a known Id */
     @NSManaged var make: String?
     @NSManaged var model: String?
     @NSManaged var year: NSNumber?
@@ -34,6 +35,7 @@ class Car : NSManagedObject {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
+    //adds all the necessary fields if available form a dictionary. This can be built on the same dictionary used to post to Parse.
     init(dictionary: [String : AnyObject], context: NSManagedObjectContext) {
         let entity = NSEntityDescription.entityForName("Car", inManagedObjectContext: context)!
         super.init(entity: entity, insertIntoManagedObjectContext: context)

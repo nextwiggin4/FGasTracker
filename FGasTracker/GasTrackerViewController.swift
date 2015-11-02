@@ -12,11 +12,15 @@ import CoreData
 class GasTrackerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var selectedCarLabel: UILabel!
+    @IBOutlet weak var mpgLabel: UILabel!
     
     var sharedContext = CoreDataStackManager.sharedInstance().managedObjectContext!
     var userInfoDictionary : [String:AnyObject]!
     var currentCar: Car?
     let formatter = NSDateFormatter()
+    
+    let mpgCalc = MPGCalculator(sigfig: 2)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,6 +73,15 @@ class GasTrackerViewController: UIViewController, UITableViewDelegate, UITableVi
         
         gasFillFetchedResultsController.delegate = self
         tableView.reloadData()
+        
+        if let car = currentCar {
+            selectedCarLabel.text = car.nickname
+        } else {
+            selectedCarLabel.text = "Please Select A Vehicle"
+        }
+        
+
+        mpgLabel.text = mpgCalc.calculateAverageMPG(gasFillFetchedResultsController.fetchedObjects as? [GasFill])
         
     }
     
@@ -213,6 +226,7 @@ class GasTrackerViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+        mpgLabel.text = mpgCalc.calculateAverageMPG(gasFillFetchedResultsController.fetchedObjects as? [GasFill])
     }
     
     func addGasStopTouchUp(){
