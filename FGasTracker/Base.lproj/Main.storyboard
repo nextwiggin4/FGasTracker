@@ -70,6 +70,13 @@
                                 <rect key="frame" x="177" y="367" width="20" height="20"/>
                                 <animations/>
                             </activityIndicatorView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fuelGauge" translatesAutoresizingMaskIntoConstraints="NO" id="Gtz-1k-h1O">
+                                <rect key="frame" x="125" y="78" width="128" height="128"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="IVd-gC-0uG"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -80,9 +87,11 @@
                             <constraint firstItem="bCu-FL-675" firstAttribute="centerY" secondItem="7pC-6h-YEW" secondAttribute="centerY" id="4ve-o3-zW4"/>
                             <constraint firstItem="Sk8-MA-jZk" firstAttribute="top" secondItem="9hk-2S-vPx" secondAttribute="bottom" constant="29" id="6mm-xL-H2P"/>
                             <constraint firstItem="quQ-f1-iKo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9t5-II-FLL"/>
+                            <constraint firstItem="mFy-qP-lAJ" firstAttribute="top" secondItem="Gtz-1k-h1O" secondAttribute="bottom" constant="8" symbolic="YES" id="Dv3-Oo-hLD"/>
                             <constraint firstItem="dnA-fA-q9A" firstAttribute="leading" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="FsB-1g-0V5"/>
                             <constraint firstItem="dnA-fA-q9A" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LPt-ys-Cpz"/>
                             <constraint firstItem="DNY-g0-BIn" firstAttribute="leading" secondItem="mFy-qP-lAJ" secondAttribute="leading" id="O1A-pc-ViA"/>
+                            <constraint firstItem="Gtz-1k-h1O" firstAttribute="centerX" secondItem="mFy-qP-lAJ" secondAttribute="centerX" id="TKt-la-rlL"/>
                             <constraint firstItem="dnA-fA-q9A" firstAttribute="leading" secondItem="quQ-f1-iKo" secondAttribute="leading" id="aBA-GA-Om1"/>
                             <constraint firstItem="DNY-g0-BIn" firstAttribute="top" secondItem="dnA-fA-q9A" secondAttribute="bottom" constant="17" id="aEZ-vk-0dp"/>
                             <constraint firstItem="9hk-2S-vPx" firstAttribute="centerX" secondItem="7pC-6h-YEW" secondAttribute="centerX" constant="1.5" id="boj-S2-fc5"/>
@@ -729,4 +738,7 @@
             <point key="canvasLocation" x="2146.5" y="369.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fuelGauge" width="128" height="128"/>
+    </resources>
 </document>

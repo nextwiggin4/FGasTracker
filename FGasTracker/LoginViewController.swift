@@ -43,6 +43,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //set the debug text to an empty string.
+        debugInfo.text = ""
         
     }
     
@@ -137,7 +138,7 @@ class LoginViewController: UIViewController {
     
     func getParesData(){
         
-        //create a dictionary for getting the cars that belong to the user who loged in.
+        //create a dictionary for getting the cars that belong to the user who loged in. The "where" field is used by parse to find the specific cars assoicated with the users objectId
         let methodArguments = [
             "where" : "{\"userObjectId\":\"" + self.objectId + "\"}"
         ]
@@ -150,34 +151,20 @@ class LoginViewController: UIViewController {
             } else {
                 if let carsInfo = JSONResults["results"] as? [[String:AnyObject]]{
                     for car in carsInfo {
-                        var newCarDictionary = Dictionary<String, AnyObject>()
+                        /* the car dictionary can be used directly by the NSManagedObject to create new car objects */
                         
-                        if let make = car["make"]{
-                            newCarDictionary["make"] = make
-                        }
-                        if let model = car["model"]{
-                            newCarDictionary["model"] = model
-                        }
-                        if let nickname = car["nickname"]{
-                            newCarDictionary["nickname"] = nickname
-                        }
+                        _ = Car(dictionary: car, context: self.sharedContext)
                         
-                        if let year = car["year"]{
-                            newCarDictionary["year"] = year
-                        }
-                        
-                        newCarDictionary["objectId"] = car["objectId"]
-                        newCarDictionary["userObjectId"] = car["userObjectId"]
-                        
-                        _ = Car(dictionary: newCarDictionary, context: self.sharedContext)
                         CoreDataStackManager.sharedInstance().saveContext()
                     }
                 }
             }
+            //once complete, complete login
             self.completeLogin()
         }
     }
     
+    //this will dismiss the keyboard if you touch outside of the text box field
     func didTapView(){
         self.view.endEditing(true)
     }

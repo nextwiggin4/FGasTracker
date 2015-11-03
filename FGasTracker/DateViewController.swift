@@ -20,6 +20,7 @@ class DateViewController : UIViewController {
         datePicker.date = date
     }
     
+    /* if you select the change the date button, it will take the date object and push it back to tbe previous view controller, allowing you to change the date. */
     @IBAction func changeTheDateTouchUp(sender: AnyObject) {
         let controller = self.navigationController!.viewControllers[1] as! AddFillUpViewController
         controller.rightNow = datePicker.date

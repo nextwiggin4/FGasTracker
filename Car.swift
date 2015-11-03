@@ -30,6 +30,7 @@ class Car : NSManagedObject {
     @NSManaged var userObjectId : String?
     @NSManaged var nickname: String
     @NSManaged var gasFill: [GasFill]
+    @NSManaged var checkParseForGasFills: Bool
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
@@ -47,6 +48,7 @@ class Car : NSManagedObject {
         userObjectId = dictionary[Keys.userObjectId] as? String
         nickname = dictionary[Keys.Nickname] as! String
         
+        checkParseForGasFills = true
     }
     
     

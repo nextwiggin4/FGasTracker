@@ -11,6 +11,8 @@ import CoreData
 
 class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
+    /* this class deals with the Add Car view. In it, the user will be able to add new cars, edit cars and delete cars. */
+    
     @IBOutlet weak var makeTextField: UITextField!
     @IBOutlet weak var modelTextField: UITextField!
     @IBOutlet weak var yearTextField: UITextField!
@@ -28,6 +30,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         super.viewDidLoad()
         
         
+        //fetch all cars in stored in coredata.
         do {
             try fetchedResultsController.performFetch()
         } catch let error as NSError {
@@ -37,6 +40,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         
         fetchedResultsController.delegate = self
         
+        //if the carToEdit object is not nil (there is a car to edit) put all the information in the propper feild and a button to allow for deleting the car.
         if (carToEdit != nil) {
             instructionLabel.text = "Edit this car"
             buttonText.setTitle("Save Edit", forState: .Normal)
@@ -48,11 +52,12 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Delete Car", style: .Plain, target: self, action: "deleteCarTouchUp")
         }
         
+        //check for the userInfoDictionary and grab the objectId (this is the users objectId from Parse) and store it for later use.
         if let userInfo = NSKeyedUnarchiver.unarchiveObjectWithFile(filePath) as? [String : AnyObject] {
             userObjectId = userInfo["objectId"] as? String
-            print(userObjectId!)
         }
         
+        //this code is used to allow for dismissing the keyboard when a user touches outside of the textfield
         let tapRecognizer = UITapGestureRecognizer()
         tapRecognizer.addTarget(self, action: "didTapView")
         self.view.addGestureRecognizer(tapRecognizer)
@@ -60,16 +65,17 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        //subscribe to the keyboard notifcations. This is used to allow the screen to be moved outof the way for textfields that can't be seen.
         self.subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        //unsubscribe from the KeyboardNotifications. Doing this here will unsubscribe you when the view controller is dismissed. It will also do it when the imagePickerController is dismissed. To deal with that you have to enable again when after everytime the imagePicker is dismissed.
+        //unsubscribe from the KeyboardNotifications. Doing this here will unsubscribe you when the view controller is dismissed.
         self.unsubscribeFromKeyboardNotifications()
     }
     
+    //the fetechedResultsController will grab all cars for the user from CoreData. They are do not need to be sorted in this context.
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest(entityName: "Car")
         
@@ -79,13 +85,14 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         return fetchResultsController
     }()
     
+    //this creates the file path for the userInfoDictionary.
     var filePath : String {
         let manager = NSFileManager.defaultManager()
         let url = manager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
         return url.URLByAppendingPathComponent("userInfoArchive").path!
     }
     
-
+    /* the addCar touchup function is called if there is a car to edit or not. First verify there is a nick name (the only necessary filed) then add a new car or edit an old one if appropriate */
     @IBAction func addCar(sender: AnyObject) {
         
         if (self.nicknameTextField.text!.isEmpty) {
@@ -95,21 +102,27 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         } else {
             switchIndicatorOn(true)
             if (carToEdit == nil) {
-                
+                //this function creates a mutable dictionary populated with all the text fields.
                 var newCarDictionary = createDicitonary()
-            
+                //call the parse function to add a car to Parse
                 parse.sharedInstance().postToParse(parse.Resources.Cars, methodArguments: newCarDictionary){JSONResults, error in
                     
                     if let error = error{
-                        print(error)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.switchIndicatorOn(false)
+                            self.throwAlert(error.localizedDescription)
+                        })
                     } else {
                         print(JSONResults)
-                        
+                        // if the car object was succesfully added to parse, then grab the car's objectId and add it to the dictionary.
                         newCarDictionary["objectId"] = JSONResults["objectId"]
                         
+                        //create a new car object
                         _ = Car(dictionary: newCarDictionary, context: self.sharedContext)
-                
+                        
+                        //persist the car to coreData. Awesome.
                         CoreDataStackManager.sharedInstance().saveContext()
+                        //dismiss the view controller and do the stuff that resets the buttons and indicators.
                         dispatch_async(dispatch_get_main_queue(), {
                             self.switchIndicatorOn(false)
                             self.navigationController!.popViewControllerAnimated(true)
@@ -117,16 +130,21 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
                     }
                 }
             } else {
+                //this function creates a mutable dictionary populated with all the text fields.
                 var newCarDictionary = createDicitonary()
                 
+                //this function will make a put car to parse, updating a current car object
                 parse.sharedInstance().putToParse(parse.Resources.Cars, objectId: (carToEdit?.objectId)!, methodArguments: newCarDictionary){
                     JSONResults, error in
                     
                     if let error = error{
-                        print(error)
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.switchIndicatorOn(false)
+                            self.throwAlert(error.localizedDescription)
+                        })
                     } else {
-                        print(JSONResults)
                         
+                        //if successfull, update the car NSManaged object with the text fields.
                         newCarDictionary["objectId"] = JSONResults["objectId"]
                         
                         if let make = self.makeTextField.text {
@@ -141,7 +159,9 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
                             }
                         }
                         
+                        //save the fields to coreData
                         CoreDataStackManager.sharedInstance().saveContext()
+                        //dismiss the view controller and once again do the stuff that resets the buttons and indicators.
                         dispatch_async(dispatch_get_main_queue(), {
                             self.switchIndicatorOn(false)
                             self.navigationController!.popViewControllerAnimated(true)
@@ -152,15 +172,21 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
     }
     
+    /* if the delete button is tapped, it will call this function. The carToEdit will be deleted from Parse and from CoreData. Suck on that car data, you never stood a chance! */
     func deleteCarTouchUp(){
         self.switchIndicatorOn(true)
+        //this function calls a delete from Parse.
         parse.sharedInstance().deleteFromParse(parse.Resources.Cars, objectId: (carToEdit?.objectId)!){JSONResults, error in
             
             if let error = error{
-                print(error)
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.switchIndicatorOn(false)
+                    self.throwAlert(error.localizedDescription)
+                })
             } else {
                 print(JSONResults)
                 
+                //if the delete from Parse is successful, delete the object from CoreData too
                 self.sharedContext.deleteObject(self.carToEdit!)
                 
                 CoreDataStackManager.sharedInstance().saveContext()
@@ -176,6 +202,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         self.view.endEditing(true)
     }
     
+    /* this function creates a dictionary populated by the text fields on the view. It checks for any data, turns it the correct type (if possible) and returns the new dictionary. */
     func createDicitonary() -> Dictionary<String, AnyObject>{
         var newCarDictionary = Dictionary<String, AnyObject>()
         
@@ -200,6 +227,7 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
         return newCarDictionary
     }
     
+    /* this function is a helper that switches the activity indicator on and off, hides and disable buttons that shouldn't be opperating while the app is connecting to the internet. True indicates that there is background activity you need to wait for. */
     func switchIndicatorOn(state: Bool){
         if state {
             buttonText.hidden = true
@@ -211,6 +239,13 @@ class AddCarViewController: UIViewController, NSFetchedResultsControllerDelegate
             self.navigationItem.rightBarButtonItem?.enabled = false
         }
         
+    }
+    
+    /* this function will throw an alert for any string passed to it.*/
+    func throwAlert(alertMessage: String){
+        let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .Cancel, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
 }

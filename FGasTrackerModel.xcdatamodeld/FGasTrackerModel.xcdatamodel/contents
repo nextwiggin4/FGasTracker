@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
     <entity name="Car" representedClassName="Car" syncable="YES">
+        <attribute name="checkParseForGasFills" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="make" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="nickname" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +24,7 @@
         <relationship name="car" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Car" inverseName="gasFill" inverseEntity="Car" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Car" positionX="-54" positionY="-9" width="128" height="150"/>
+        <element name="Car" positionX="-54" positionY="-9" width="128" height="165"/>
         <element name="GasFill" positionX="-63" positionY="-18" width="128" height="210"/>
     </elements>
 </model>
