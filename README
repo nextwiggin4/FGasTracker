@@ -1,0 +1,64 @@
+FGasTracker
+
+The intention of this app was to build an application that would allow me to track some basic information and easily get an average miles per gallon. Furthermore, I wanted this app to persist the data locally for speed and offline use. But I also wanted it to have an online backup, and I created a Parse account that would allow a user to store information on parse and get it after logging out and back in.
+
+When the app starts you are presented with a log in view. The user can put in their username and password if they have one. If not the user can register a new account by tapping the "register" button. This will display a new view where the new user can add a new username and password. If unsuccesful, debug info will be displayed alerting the user to what's wrong (eg. the username has already been registered). If successful in logging in or registering a new account, a navigation view controller will be presented.
+
+//-----------------------------------------------------------//
+
+The next view is composed of three main components: 
+	1) an upper area which will display the nickname of your car and the calculated MPG
+	2) a table view containing each fill up. displayed will be the gallons filled and the date of the fill up.
+	3) a navigation bar with a logout button and a plus symbol.
+
+1) the upper area will allert you if you need to select a car or add more fill ups to calculate an MPG. under normal use this will take a few fills to be able to calculate.
+
+2) the table view will show a list of all your fill ups. By swiping to the left it will reveal a "delete" button. This will delete the object from parse and CoreData. By tapping on a cell in the table view it will forward you to a view where you can edit all the fields in the selected fill up.
+
+3) The logout function will delete your session from Parse and delete all your information for CoreData. Logging in again will add all the information back. Hitting the "+" symbol will allow you to add a new fill up by presenting the next view in the navigation view.
+
+//-----------------------------------------------------------//
+
+The next view allows you to add or edit a fill up. It is composed of 8 components: 
+	1) A UIPicker
+	2) A mileage textField
+	3) A gallons textField
+	4) A Price textField
+	5) A Complete Fill switch
+	6) A Date Button
+	7) An Add/Edit button
+	8) An Add/Edit Car button
+
+1) The UIPicker allows you to choose between all the cars that you have added. It initally presents an option to "add a new car" When seleceted a button in the navigation bar will say "add car". As you scroll through you're vehicle the Add Car button will become an Edit Car button. This is the primary way to select a car for the entire app. To view your average mpg for any car you must select it in the UIPicker and return to the previous view.
+
+2) The mileage textField can be added as either the Total Mileage ("the mileage on your ordometer") or the trip mileage. Whichever is most convient for the user, but only one is necessary.
+
+3) The Total Gallons is the gallons for that fill up
+
+4) The Price textField can be eitehr the price per gallon or the total price of the fill up.
+
+5) The complete fill switch is used to increase the accuracy of the average MPG. An incomplete fill up can throw off the calculation, since it assumes that all measuremnts start at a full tank. If you don't fill up completely, just flip it to off
+
+6) The date button shows the current date ("or the date of the fill up being edited"). By tapping the view you are presented with a view where you can easily change the date and time to it's propper time.
+
+7) The Add/Edit button will save all the information in the view by creating a new object or editing a previous one, then it will pop the view and return you to the previous view.
+
+8) The Add/Edit car button will present a view where you can edit a specific car.
+
+//-----------------------------------------------------------//
+
+The final view allows you to add or edit a car. It is composed of 6 components
+	1) A Make textField
+	2) A Model textField
+	3) A Year textField
+	4) A Nickname textField
+	5) An Add/Edit button
+	6) A delete button
+
+1,2,3) the Make, Model and Year are all optional fields. They can be added if the user wants, but they are not necessary.
+
+4) the Nickname field is necessary. It does not need to be unique, but I might recomend it.
+
+5) the "add/edit" button will be presented based on which mode you are in
+
+6) The delete button will only be visible if you are editing the car. Tapping the delete button will delete it from parse and locally. It will then pop the view controller and return you to the previous view.
